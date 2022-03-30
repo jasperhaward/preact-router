@@ -1,0 +1,31 @@
+{
+  "name": "@jasperhaward/preact-router",
+  "version": "1.0.1",
+  "description": "Lightweight router for Preact.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasperhaward/preact-router.git"
+  },
+  "keywords": [
+    "router",
+    "preact"
+  ],
+  "author": "Jasper Haward",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasperhaward/preact-router/issues"
+  },
+  "homepage": "https://github.com/jasperhaward/preact-router#readme",
+  "peerDependencies": {
+    "preact": ">=10"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3",
+    "preact": "^10.7.0"
+  }
+}
