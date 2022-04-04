@@ -1,6 +1,7 @@
-import * as preact from "preact";
-export * from "./NavLink";
-export * from "./Redirect";
-export * from "./Route";
-export * from "./Router";
-export * from "./history.d";
+export * from "./components/NavLink";
+export * from "./components/Redirect";
+export * from "./components/Route";
+export * from "./components/Router";
+export * from "./hooks/useHistory";
+export * from "./hooks/useLocation";
+export * from "./hooks/useMatch";

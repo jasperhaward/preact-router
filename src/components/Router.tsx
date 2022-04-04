@@ -1,35 +1,30 @@
-import type { ComponentChildren } from "preact";
+import { ComponentChildren } from "preact";
 import { useState, useEffect } from "preact/hooks";
-import { NavContext } from "./NavContext";
+import LocationContext from "../LocationContext";
 
 export interface RouterProps {
     children: ComponentChildren;
 }
 
 export function Router({ children }: RouterProps) {
-    const [path, setPath] = useState(location.pathname);
+    const [pathname, setPathname] = useState(location.pathname);
 
     useEffect(() => {
+        // Attach history event handler
         window.addEventListener("popstate", onPopStateChange);
 
         return () => window.removeEventListener("popstate", onPopStateChange);
-    }, [path]);
+    }, [pathname]);
 
     function onPopStateChange(event: PopStateEvent) {
         const { location } = event.currentTarget as Window;
 
-        if (location.pathname !== path) {
-            setPath(location.pathname);
+        if (location.pathname !== pathname) {
+            setPathname(location.pathname);
         }
     }
 
-    if (!history.push) {
-        history.push = (path) => {
-            history.pushState(null, null, path);
-        };
-    }
-
     return (
-        <NavContext.Provider value={{ path }}>{children}</NavContext.Provider>
+        <LocationContext.Provider children={children} value={{ pathname }} />
     );
 }

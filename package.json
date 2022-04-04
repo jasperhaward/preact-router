@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "SET TS_NODE_PROJECT=tsconfig.test.json&& mocha --require ts-node/register --require test/setup.ts test/**/*"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,17 @@
     "preact": ">=10"
   },
   "devDependencies": {
-    "typescript": "^4.6.3",
-    "preact": "^10.7.0"
+    "@types/chai": "^4.3.0",
+    "@types/enzyme": "^3.10.11",
+    "@types/jsdom": "^16.2.14",
+    "@types/mocha": "^9.1.0",
+    "chai": "^4.3.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-preact-pure": "^3.4.0",
+    "jsdom": "^19.0.0",
+    "mocha": "^9.2.2",
+    "preact": "^10.7.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
   }
 }
