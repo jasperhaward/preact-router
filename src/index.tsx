@@ -5,3 +5,4 @@ export * from "./components/Router";
 export * from "./hooks/useHistory";
 export * from "./hooks/useLocation";
 export * from "./hooks/useMatch";
+export * from "./hooks/usePattern";

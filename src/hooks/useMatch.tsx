@@ -1,3 +1,5 @@
+import { usePattern } from "..";
+
 // TypeScript params parsing see:
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/express-serve-static-core/index.d.ts#L99
 
@@ -46,27 +48,7 @@ export function useMatch<Pattern extends string>(
     pattern: Pattern,
     pathname: string
 ): Match<Pattern> {
-    function compilePattern(pattern: string): [RegExp, string[]] {
-        let paramNames: string[] = [];
-        let regexpSource =
-            "^" +
-            pattern
-                .replace(/\/*\*?$/, "") // Ignore trailing / and /*, we'll handle it below
-                .replace(/^\/*/, "/") // Make sure it has a leading /
-                .replace(/[\\.*+^$?{}|()[\]]/g, "\\$&") // Escape special regex chars
-                .replace(/:(\w+)/g, (_: string, paramName: string) => {
-                    paramNames.push(paramName);
-                    return "([^\\/]+)";
-                });
-
-        regexpSource += "\\/*$"; // Ignore trailing slashes;
-
-        let matcher = new RegExp(regexpSource);
-
-        return [matcher, paramNames];
-    }
-
-    let [matcher, paramNames] = compilePattern(pattern);
+    let [matcher, paramNames] = usePattern(pattern);
 
     let match = pathname.match(matcher);
 
