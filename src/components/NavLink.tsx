@@ -10,6 +10,18 @@ export function NavLink(props: NavLinkProps) {
     const location = useLocation();
 
     function onClick(event: MouseEvent) {
+        // Allow default behavior of opening link in new tab etc.
+        if (
+            props.target === "_blank" ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.altKey ||
+            event.shiftKey ||
+            event.button !== 0
+        ) {
+            return;
+        }
+
         event.preventDefault();
 
         onNavigate(props.href);
