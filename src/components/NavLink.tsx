@@ -1,7 +1,9 @@
 import type { JSX } from "preact";
 import { useHistory, useLocation, useMatch } from "..";
 
-export interface NavLinkProps extends JSX.HTMLAttributes<HTMLAnchorElement> {}
+export interface NavLinkProps extends JSX.HTMLAttributes<HTMLAnchorElement> {
+    activeClassName?: string;
+}
 
 export function NavLink(props: NavLinkProps) {
     const history = useHistory();
@@ -20,12 +22,20 @@ export function NavLink(props: NavLinkProps) {
         window.dispatchEvent(new Event("popstate"));
     }
 
-    // Apply type="active" when current url matches route
-    if (props.href && useMatch(props.href, location.pathname) !== null) {
-        if (props.type) props.type += " ";
+    const isActive =
+        props.href && useMatch(props.href, location.pathname) !== null;
 
-        props.type += "active";
-    }
-
-    return <a {...props} onClick={onClick} />;
+    return (
+        <a
+            {...props}
+            // Apply activeClassName when current url matches route
+            className={[
+                props.className && props.className,
+                isActive && props.activeClassName,
+            ]
+                .filter((e) => !!e)
+                .join(" ")}
+            onClick={onClick}
+        />
+    );
 }
